@@ -6,6 +6,8 @@ import { shoppingCartService } from '../../services/shopping-cart.service';
   selector: 'app-header',
   template: `<mat-toolbar color="primary">
     <a routerLink='/'><span>My Store</span></a>
+    {{quantity$ | async | json}}
+    {{total$ | async | json}} 
   
   <span class="spacer">
   </span>
@@ -14,7 +16,12 @@ import { shoppingCartService } from '../../services/shopping-cart.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(private router:Router){}
+
+    quantity$ = this.shoppingCartSvc.quantityAction$;
+    total$ = this.shoppingCartSvc.totalAction$;
+    cart$ = this.shoppingCartSvc.cartAction$;
+
+  constructor(private router:Router, private shoppingCartSvc: shoppingCartService){}
   goToCheckout():void{
     this.router.navigate(['/checkout']);
   }
