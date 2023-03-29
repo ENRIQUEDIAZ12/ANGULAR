@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject, Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Product } from "src/app/pages/products/interfaces/product.interface";
 
     @Injectable(
@@ -10,9 +10,9 @@ export class shoppingCartService{
   
     products: Product[] = [];
 
-    private cartSubject = new Subject<Product[]>(); 
-    private totalSubject = new Subject<number>(); //Total de productos
-    private quantitySubject = new Subject<number>(); //cantidad total en precio
+    private cartSubject = new BehaviorSubject<Product[]>([]); 
+    private totalSubject = new BehaviorSubject<number>(0); //Total de productos
+    private quantitySubject = new BehaviorSubject<number>(0); //cantidad total en precio
 
     get totalAction$(): Observable<number>{ //Se guarda el valor de del precio de los productos seleccionados
         return this.totalSubject.asObservable();

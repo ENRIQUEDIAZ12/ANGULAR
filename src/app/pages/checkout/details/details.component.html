@@ -7,11 +7,11 @@
             <th>Subtotal</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Name</td>
-                <td>qty</td>
-                <td>Price</td>
-                <td>Subtotal</td>
+            <tr *ngFor="let item of cart$ | async">
+                <td>{{item.name}}</td>
+                <td>{{item.qty}}</td>
+                <td>{{item.price | currency}}</td>
+                <td>{{item.qty * item.price | currency}}</td>
             </tr>
         </tbody>
 
@@ -19,7 +19,7 @@
     <div class="container__total">
         <p class="total">
             <strong>
-                Total: <span>$988</span>
+                Total: <span>300</span>
             </strong>
         </p>
     </div>
